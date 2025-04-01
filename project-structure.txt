@@ -1,0 +1,28 @@
+spreadsheet-frontend/
+├── public/
+│   └── index.html
+├── src/
+│   ├── api/
+│   │   └── api.js
+│   ├── components/
+│   │   ├── Layout.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── PrivateRoute.jsx
+│   │   ├── SpreadsheetForm.jsx
+│   │   ├── DataCard.jsx
+│   │   └── ...
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   └── useFetch.js
+│   ├── pages/
+│   │   ├── Login.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── CreateSpreadsheet.jsx
+│   │   ├── SheetDetail.jsx
+│   │   └── ...
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+├── vite.config.js
+└── tailwind.config.js
