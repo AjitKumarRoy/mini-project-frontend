@@ -1,18 +1,23 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'https://goog-sheet-backend-avh5gkemdyambdbc.westindia-01.azurewebsites.net/',
-  withCredentials: true, // important if your backend sets HttpOnly cookies
-})
+  withCredentials: true,  // ✅ Ensures cookies are sent in requests
+});
 
-// Optional: Add interceptors for error handling or request headers
+// ✅ Explicitly ensure `withCredentials: true` in all requests
+api.interceptors.request.use((config) => {
+  config.withCredentials = true; 
+  return config;
+});
+
+// ✅ Global error handling
 api.interceptors.response.use(
   response => response,
   error => {
-    // global error handling
-    return Promise.reject(error)
+    console.error("API Error:", error);
+    return Promise.reject(error);
   }
-)
+);
 
-
-export default api
+export default api;
