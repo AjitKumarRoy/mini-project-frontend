@@ -1,26 +1,17 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://goog-sheet-backend-avh5gkemdyambdbc.westindia-01.azurewebsites.net/',
-  withCredentials: true,  // ✅ Ensures cookies are sent in requests
-});
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://goog-sheet-backend-avh5gkemdyambdbc.westindia-01.azurewebsites.net',
+  withCredentials: true, // important if your backend sets HttpOnly cookies
+})
 
-// ✅ Explicitly ensure `withCredentials: true` in all requests
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-// ✅ Global error handling
+// Optional: Add interceptors for error handling or request headers
 api.interceptors.response.use(
   response => response,
   error => {
-    console.error("API Error:", error);
-    return Promise.reject(error);
+    // global error handling
+    return Promise.reject(error)
   }
-);
+)
 
-export default api;
+export default api
