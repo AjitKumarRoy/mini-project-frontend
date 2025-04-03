@@ -45,7 +45,7 @@ const Login = () => {
           Login
         </button>
         { 
-          <a href="http://localhost:3000/api/auth/google" 
+          <a href="https://goog-sheet-backend-avh5gkemdyambdbc.westindia-01.azurewebsites.net/api/auth/google" 
              className="block text-center mt-4">
             Sign in with Google
           </a>
