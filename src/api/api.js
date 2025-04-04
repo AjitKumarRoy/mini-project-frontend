@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://goog-sheet-backend-avh5gkemdyambdbc.westindia-01.azurewebsites.net',
   withCredentials: true, // important if your backend sets HttpOnly cookies
 })
 
