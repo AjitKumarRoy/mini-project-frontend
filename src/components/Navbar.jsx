@@ -79,7 +79,7 @@ const Navbar = () => {
             aria-label="User Menu"
           >
             <motion.img
-              src={user?.profilePicture || "https://via.placeholder.com/40"}
+              src={user?.profilePicture}
               alt="Profile"
               className="w-12 h-12 rounded-full border-2 border-white hover:shadow-md transition-shadow"
               whileHover={{ scale: 1.05 }}
@@ -99,7 +99,7 @@ const Navbar = () => {
               >
                 <div className="px-5 py-4 border-b border-gray-200 bg-gray-50">
                   <motion.img
-                    src={user?.profilePicture || "https://via.placeholder.com/40"}
+                    src={user?.profilePicture }
                     alt="Profile"
                     className="w-16 h-16 rounded-full mx-auto border-2 border-indigo-500 mb-2"
                     initial={{ opacity: 0, scale: 0.8 }}
