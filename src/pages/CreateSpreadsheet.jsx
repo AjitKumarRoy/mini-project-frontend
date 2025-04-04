@@ -10,7 +10,7 @@ const CreateSpreadsheet = () => {
   const [columns, setColumns] = useState([{ name: '', type: 'Text' }]);
   const [selectedDates, setSelectedDates] = useState({});
   const [showCalendar, setShowCalendar] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); // New state
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleColumnChange = (index, key, value) => {
     const updatedCols = [...columns];
@@ -53,7 +53,7 @@ const CreateSpreadsheet = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) {
-      return; // Prevent multiple submissions
+      return;
     }
     setIsSubmitting(true);
     try {
@@ -72,7 +72,7 @@ const CreateSpreadsheet = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setIsSubmitting(false); // Re-enable the button
+      setIsSubmitting(false);
     }
   };
 
@@ -93,10 +93,10 @@ const CreateSpreadsheet = () => {
           </div>
 
           {columns.map((col, idx) => (
-            <div key={idx} className="flex items-center space-x-2">
+            <div key={idx} className="flex items-center space-x-2 w-full">
               <input
                 type="text"
-                className={`flex-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 ${
+                className={`flex-grow border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 ${
                   col.type === 'Date' ? 'cursor-pointer' : ''
                 }`}
                 placeholder={col.type === 'Date' ? 'Select Date' : 'Column Name'}
@@ -105,15 +105,22 @@ const CreateSpreadsheet = () => {
                 onClick={() => handleColumnNameClick(idx)}
                 required
               />
-              <select
-                className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
-                value={col.type}
-                onChange={(e) => handleColumnChange(idx, 'type', e.target.value)}
-              >
-                <option>Text</option>
-                <option>Number</option>
-                <option>Date</option>
-              </select>
+              <div className="relative">
+                <select
+                  className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 pr-8 appearance-none" // Added pr-8 and appearance-none
+                  value={col.type}
+                  onChange={(e) => handleColumnChange(idx, 'type', e.target.value)}
+                >
+                  <option>Text</option>
+                  <option>Number</option>
+                  <option>Date</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
               {columns.length > 1 && (
                 <button type="button" className="text-red-500 hover:text-red-700" onClick={() => removeColumn(idx)}>
                   X
@@ -142,9 +149,9 @@ const CreateSpreadsheet = () => {
           <button
             type="submit"
             className="bg-red-500 hover:bg-red-600 text-white py-3 rounded-md w-full"
-            disabled={isSubmitting} // Disable the button
+            disabled={isSubmitting}
           >
-            {isSubmitting ? 'Creating...' : 'Create Spreadsheet'} {/* Show loading text */}
+            {isSubmitting ? 'Creating...' : 'Create Spreadsheet'}
           </button>
         </form>
       </div>

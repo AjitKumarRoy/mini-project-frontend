@@ -1,24 +1,29 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
-import CreateSpreadsheet from './pages/CreateSpreadsheet'
-import SheetDetail from './pages/SheetDetail'
-import PrivateRoute from './components/PrivateRoute' // for protected routes
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import CreateSpreadsheet from './pages/CreateSpreadsheet';
+import SheetDetail from './pages/SheetDetail';
+import PrivateRoute from './components/PrivateRoute'; // for protected routes
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import Layout from './components/Layout'
-import './App.css'
+import Layout from './components/Layout';
+import PublicLayout from './components/PublicLayout'; // Create a new layout for public pages
+import './App.css';
 
 function App() {
   return (
     <Routes>
-      {/* Public routes */}
-      <Route path="/login" element={<Login />} />
+      {/* Public Routes with PublicLayout (if needed) */}
+      <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+      <Route path="/privacy-policy" element={<PublicLayout><PrivacyPolicyPage /></PublicLayout>} />
+      <Route path="/terms-of-service" element={<PublicLayout><TermsOfServicePage /></PublicLayout>} />
+      <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+      <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
 
-      {/* Protected routes */}
+      {/* Protected Routes with Layout */}
       <Route
         path="/"
         element={
@@ -30,13 +35,10 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path="create-spreadsheet" element={<CreateSpreadsheet />} />
         <Route path="sheets/:sheetId" element={<SheetDetail />} />
-        <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="terms-of-service" element={<TermsOfServicePage />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="about" element={<About />} />
+        {/* No need to redefine public routes here */}
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -15,7 +15,6 @@ export function useAuth() {
   async function checkAuth() {
     try {
       const res = await api.get('/api/auth/profile', { withCredentials: true })
-      console.log("Auth success:", res.data)
       setIsAuthenticated(true)
       setUser(res.data) // store user data
     } catch (err) {

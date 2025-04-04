@@ -8,6 +8,7 @@ import {
   InformationCircleIcon,
   ChatBubbleLeftRightIcon,
   ArrowRightOnRectangleIcon,
+  UserIcon, // Import UserIcon for Sign In
 } from "@heroicons/react/24/outline"; // More relevant icons
 
 const Navbar = () => {
@@ -63,6 +64,11 @@ const Navbar = () => {
     tap: { scale: 0.95 },
   };
 
+  const signInButtonVariants = {
+    hover: { backgroundColor: "#3b82f6" }, // Blue 500 on hover
+    tap: { scale: 0.95 },
+  };
+
   return (
     <nav className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg py-3 px-6 w-full z-50 backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
@@ -79,7 +85,7 @@ const Navbar = () => {
             aria-label="User Menu"
           >
             <motion.img
-              src={user?.profilePicture}
+              src={user?.profilePicture || "https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png"}
               alt="Profile"
               className="w-12 h-12 rounded-full border-2 border-white hover:shadow-md transition-shadow"
               whileHover={{ scale: 1.05 }}
@@ -91,7 +97,7 @@ const Navbar = () => {
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                className="absolute right-0 mt-3 w-64 bg-white text-gray-800 shadow-xl rounded-xl overflow-hidden"
+                className="absolute right-0 mt-3 w-64 bg-white text-gray-800 shadow-xl rounded-xl overflow-hidden z-[99999999]" // Increased z-index
                 variants={dropdownVariants}
                 initial="hidden"
                 animate="visible"
@@ -99,15 +105,17 @@ const Navbar = () => {
               >
                 <div className="px-5 py-4 border-b border-gray-200 bg-gray-50">
                   <motion.img
-                    src={user?.profilePicture }
+                    src={user?.profilePicture || "https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png"}
                     alt="Profile"
                     className="w-16 h-16 rounded-full mx-auto border-2 border-indigo-500 mb-2"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   />
-                  <p className="text-center font-semibold text-lg text-gray-900">{user?.name || "User Account"}</p>
-                  <p className="text-center text-sm text-gray-500 italic">Logged in</p>
+                  <p className="text-center font-semibold text-lg text-gray-900">{user?.name || "Guest"}</p>
+                  <p className="text-center text-sm text-gray-500 italic">
+                    {user ? "Logged in" : "Guest User"}
+                  </p>
                 </div>
 
                 {/* Premium Nav Links */}
@@ -163,19 +171,34 @@ const Navbar = () => {
                 </motion.ul>
 
                 <motion.div className="px-5 py-3 border-t border-gray-200" variants={menuItemVariants}>
-                  <motion.button
-                    onClick={() => {
-                      logout();
-                      closeDropdown();
-                    }}
-                    className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md transition-colors font-semibold flex items-center justify-center gap-2"
-                    variants={logoutButtonVariants}
-                    whileHover="hover"
-                    whileTap="tap"
-                  >
-                    <ArrowRightOnRectangleIcon className="h-5 w-5" />
-                    Sign Out
-                  </motion.button>
+                  {user ? (
+                    <motion.button
+                      onClick={() => {
+                        logout();
+                        closeDropdown();
+                      }}
+                      className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md transition-colors font-semibold flex items-center justify-center gap-2"
+                      variants={logoutButtonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                    >
+                      <ArrowRightOnRectangleIcon className="h-5 w-5" />
+                      Sign Out
+                    </motion.button>
+                  ) : (
+                    <Link to="/login" className="w-full focus:outline-none">
+                      <motion.button
+                        className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition-colors font-semibold flex items-center justify-center gap-2"
+                        variants={signInButtonVariants}
+                        whileHover="hover"
+                        whileTap="tap"
+                        onClick={closeDropdown}
+                      >
+                        <UserIcon className="h-5 w-5" />
+                        Sign In
+                      </motion.button>
+                    </Link>
+                  )}
                 </motion.div>
               </motion.div>
             )}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { FcGoogle } from 'react-icons/fc'; // Import the Google icon
+import { FcGoogle } from 'react-icons/fc';
 import api from "../api/api";
 
 const Login = () => {
-  const { googleLogin } = useAuth(); // Assuming you have a googleLogin function in your useAuth hook
+  const { googleLogin } = useAuth();
 
   const handleGoogleLogin = () => {
-    window.location.href = api.defaults.baseURL + '/api/auth/google'; // Use the baseURL from api.js
+    window.location.href = api.defaults.baseURL + '/api/auth/google';
   };
 
   return (
@@ -21,9 +21,13 @@ const Login = () => {
         <div className="absolute bg-white opacity-15 rounded-full animate-pulse" style={{ top: '45%', left: '50%', width: '70px', height: '70px', animationDelay: '2s' }}></div>
       </div>
 
-      <div className="relative bg-white shadow-xl rounded-lg p-8 max-w-md w-full ">
-        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6 text-3xl font-extrabold text-black tracking-wider">EASY  <span className="text-yellow-300">SHEETS</span></h2>
+      {/* Login Card */}
+      <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full "> {/* Removed "relative" here */}
+        <h2 className="text-3xl font-extrabold text-black tracking-wider text-center mb-6">
+          EASY <span className="text-yellow-300">SHEETS</span>
+        </h2>
 
+        {/* Google Sign-in Button */}
         <button
           onClick={handleGoogleLogin}
           className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
