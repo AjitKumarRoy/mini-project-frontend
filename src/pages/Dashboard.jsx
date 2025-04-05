@@ -3,7 +3,7 @@ import api from "../api/api";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react"; // Import Trash2 (delete icon)
+import { Trash2 } from "lucide-react"; 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 const Dashboard = () => {
@@ -53,7 +53,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 flex flex-col items-center">
+    <div className="p-4 bg-gray-100 flex flex-col items-center pt-20">
       {loading ? (
         <div className="flex justify-center items-center h-40">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>

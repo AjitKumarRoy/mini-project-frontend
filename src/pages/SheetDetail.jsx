@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button"; // Assuming you have a Button component
-import { Trash2 } from "lucide-react"; // Assuming you are using lucide-react for icons
+import { Button } from "@/components/ui/button"; 
+import { Trash2 } from "lucide-react"; 
 
 
 // Import a simple X icon (you can replace this with a better icon)
@@ -167,11 +167,11 @@ const SheetDetail = () => {
     };
 
     return (
-        <div className=" flex flex-col bg-gradient-to-br from-gray-100 to-gray-200">
+        <div className=" flex flex-col bg-gradient-to-br from-gray-100 to-gray-200 pt-20">
             {/* Navbar */}
-            <nav className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 left-0 w-full z-10 shadow-md">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 left-0 w-full z-10 shadow-md">
                 <h1 className="text-xl font-semibold">Spreadsheet: {spreadsheetName}</h1>
-            </nav>
+            </div>
 
             {/* Sheet List */}
             <div className="bg-white p-3 w-full z-10 flex gap-2 overflow-x-auto shadow-sm">

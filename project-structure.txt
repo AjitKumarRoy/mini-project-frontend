@@ -9,17 +9,26 @@ spreadsheet-frontend/
 │   │   ├── Navbar.jsx
 │   │   ├── PrivateRoute.jsx
 │   │   ├── SpreadsheetForm.jsx
-│   │   ├── DataCard.jsx
-│   │   └── ...
+│   │   ├── ui
+│   │        └── button.jsx
+|   |        └── card.jsx
+|   |        └── dialog.jsx
 │   ├── hooks/
 │   │   ├── useAuth.js
-│   │   └── useFetch.js
+│   │   └── 
 │   ├── pages/
 │   │   ├── Login.jsx
 │   │   ├── Dashboard.jsx
 │   │   ├── CreateSpreadsheet.jsx
 │   │   ├── SheetDetail.jsx
-│   │   └── ...
+│   │   └── About.jsx
+|   |   └── Contact.jsx
+|   |   └── PrivacyPolicy.jsx
+|   |   └── TermsOfService.jsx
+|   | 
+|   |__ styles
+|   |   └── custom.css
+|   |
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css

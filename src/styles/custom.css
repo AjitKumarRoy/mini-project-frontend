@@ -1,0 +1,25 @@
+@media (min-width: 500px) {
+    .column-name-input {
+      flex-grow: 1;
+    }
+  }
+
+/* Ensure the navbar has a high z-index and is fixed or sticky */
+nav {
+  z-index: 1000;
+  position: fixed; /* Or position: sticky; if you want it to scroll away */
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Ensure the navbar dropdown has an even higher z-index */
+nav .relative > div[class*="absolute"] {
+  z-index: 1001;
+}
+
+/* Optional: Adjust the margin/padding of your main content to avoid overlap */
+/* If your Login component is a direct child of the root, you might adjust body or a layout component */
+.bg-gradient-to-br.from-indigo-500.to-purple-600 {
+  padding-top: 50px; /* Adjust this value based on your navbar's height */
+}

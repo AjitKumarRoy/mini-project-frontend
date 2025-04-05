@@ -59,7 +59,7 @@ const Contact = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-gray-100 to-gray-200  py-12 px-4 sm:px-6 lg:px-8"
+      className="bg-gradient-to-br from-gray-100 to-gray-200  py-12 px-4 sm:px-6 lg:px-8 pt-25"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

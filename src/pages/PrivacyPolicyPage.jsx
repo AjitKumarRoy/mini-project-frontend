@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // If you need navigation
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className="bg-gray-100 py-12 sm:py-16 lg:py-20">
+    <div className="bg-gray-100 py-12 sm:py-16 lg:py-20 pt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl bg-white rounded-xl shadow-xl overflow-hidden">
         <div className="p-6 sm:p-8 lg:p-10">
           <header className="mb-8 text-center">

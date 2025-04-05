@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import api from '../api/api';
-import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from "react";
+import api from "../api/api";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateSpreadsheet = () => {
   const navigate = useNavigate();
-  const [spreadsheetName, setSpreadsheetName] = useState('');
-  const [columns, setColumns] = useState([{ name: '', type: 'Text' }]);
+  const [spreadsheetName, setSpreadsheetName] = useState("");
+  const [columns, setColumns] = useState([{ name: "", type: "Text" }]);
   const [selectedDates, setSelectedDates] = useState({});
   const [showCalendar, setShowCalendar] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,13 +16,13 @@ const CreateSpreadsheet = () => {
     const updatedCols = [...columns];
     updatedCols[index][key] = value;
     setColumns(updatedCols);
-    if (key === 'type' && value !== 'Date') {
+    if (key === "type" && value !== "Date") {
       setShowCalendar(null);
     }
   };
 
   const addColumn = () => {
-    setColumns([...columns, { name: '', type: 'Text' }]);
+    setColumns([...columns, { name: "", type: "Text" }]);
   };
 
   const removeColumn = (index) => {
@@ -43,7 +43,7 @@ const CreateSpreadsheet = () => {
   };
 
   const handleColumnNameClick = (index) => {
-    if (columns[index].type === 'Date') {
+    if (columns[index].type === "Date") {
       setShowCalendar(index);
     } else {
       setShowCalendar(null);
@@ -57,14 +57,14 @@ const CreateSpreadsheet = () => {
     }
     setIsSubmitting(true);
     try {
-      const res = await api.post('/api/sheets/createSpreadSheet', {
+      const res = await api.post("/api/sheets/createSpreadSheet", {
         title: spreadsheetName,
       });
       const { spreadsheetId } = res.data;
 
       await api.post(`/api/sheets/${spreadsheetId}/writeBoldText`, {
-        sheetName: 'Sheet1',
-        range: 'A1:' + String.fromCharCode(64 + columns.length) + '1',
+        sheetName: "Sheet1",
+        range: "A1:" + String.fromCharCode(64 + columns.length) + "1",
         values: [columns.map((col) => col.name)],
       });
 
@@ -77,12 +77,16 @@ const CreateSpreadsheet = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="p-4 bg-gradient-to-br from-gray-100 to-gray-200 pt-20 pb-8">
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-semibold mb-6 text-center text-blue-600">New Spreadsheet</h1>
+        <h1 className="text-2xl font-semibold mb-6 text-center text-blue-600">
+          New Spreadsheet
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Spreadsheet Name</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Spreadsheet Name
+            </label>
             <input
               type="text"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
@@ -96,33 +100,47 @@ const CreateSpreadsheet = () => {
             <div key={idx} className="flex items-center space-x-2 w-full">
               <input
                 type="text"
-                className={`flex-grow border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 ${
-                  col.type === 'Date' ? 'cursor-pointer' : ''
+                className={`column-name-input w-30 md:flex-grow md:flex-grow border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 text-sm ${
+                  col.type === "Date" ? "cursor-pointer" : ""
                 }`}
-                placeholder={col.type === 'Date' ? 'Select Date' : 'Column Name'}
+                placeholder={
+                  col.type === "Date" ? "Select Date" : "Column Name"
+                }
                 value={col.name}
-                onChange={(e) => handleColumnChange(idx, 'name', e.target.value)}
+                onChange={(e) =>
+                  handleColumnChange(idx, "name", e.target.value)
+                }
                 onClick={() => handleColumnNameClick(idx)}
                 required
               />
-              <div className="relative">
+              <div className="relative w-24 sm:w-auto">
                 <select
-                  className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 pr-8 appearance-none" // Added pr-8 and appearance-none
+                  className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-3 py-2 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-sm"
                   value={col.type}
-                  onChange={(e) => handleColumnChange(idx, 'type', e.target.value)}
+                  onChange={(e) =>
+                    handleColumnChange(idx, "type", e.target.value)
+                  }
                 >
                   <option>Text</option>
                   <option>Number</option>
                   <option>Date</option>
                 </select>
-                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
                 </div>
               </div>
               {columns.length > 1 && (
-                <button type="button" className="text-red-500 hover:text-red-700" onClick={() => removeColumn(idx)}>
+                <button
+                  type="button"
+                  className="text-red-500 hover:text-red-700"
+                  onClick={() => removeColumn(idx)}
+                >
                   X
                 </button>
               )}
@@ -151,7 +169,7 @@ const CreateSpreadsheet = () => {
             className="bg-red-500 hover:bg-red-600 text-white py-3 rounded-md w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Creating...' : 'Create Spreadsheet'}
+            {isSubmitting ? "Creating..." : "Create Spreadsheet"}
           </button>
         </form>
       </div>
