@@ -46,7 +46,7 @@ export function useAuth() {
       await api.post('/api/auth/logout', {}, { withCredentials: true });
       setIsAuthenticated(false)
       setUser(null) // Clear user data
-      navigate('/login')
+      navigate('/home')
     } catch (err) {
       console.error(err)
     }

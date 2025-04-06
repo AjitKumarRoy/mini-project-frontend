@@ -5,13 +5,13 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CreateSpreadsheet from "./pages/CreateSpreadsheet";
 import SheetDetail from "./pages/SheetDetail";
-import PrivateRoute from "./components/PrivateRoute"; 
+import PrivateRoute from "./components/PrivateRoute";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Layout from "./components/Layout";
-import PublicLayout from "./components/PublicLayout"; 
+import PublicLayout from "./components/PublicLayout";
 import "./App.css";
 import "./styles/custom.css";
 import api from "./api/api";
@@ -43,7 +43,7 @@ function App() {
     <Routes>
       {/* Public Routes with PublicLayout (if needed) */}
       <Route
-        path="/login"
+        path="/home"
         element={
           <PublicLayout>
             <Login />
