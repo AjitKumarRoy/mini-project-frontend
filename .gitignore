@@ -13,6 +13,7 @@ dist-ssr
 *.local
 
 project-structure.txt
+.env.development
 
 # Editor directories and files
 .vscode/*
