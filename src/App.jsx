@@ -40,10 +40,11 @@ function App() {
   }, [hasViewedSession]);
 
   return (
+    // App.jsx
     <Routes>
       {/* Public Routes with PublicLayout (if needed) */}
       <Route
-        path="/home"
+        path="/login"
         element={
           <PublicLayout>
             <Login />
@@ -83,19 +84,38 @@ function App() {
         }
       />
 
-      {/* Protected Routes with Layout */}
+      {/* Dashboard accessible for everyone */}
       <Route
         path="/"
         element={
-          <PrivateRoute>
-            <Layout />
-          </PrivateRoute>
+          <Layout>
+            {" "}
+            {/* You may decide if you want to use the same layout or create a new one */}
+            <Dashboard />
+          </Layout>
         }
-      >
+      />
+      {/* Other public routes... */}
+
+      {/* Layout Wrapper for nested routes */}
+      <Route element={<Layout />}>
         <Route index element={<Dashboard />} />
-        <Route path="create-spreadsheet" element={<CreateSpreadsheet />} />
-        <Route path="sheets/:sheetId" element={<SheetDetail />} />
-        {/* No need to redefine public routes here */}
+        <Route
+          path="create-spreadsheet"
+          element={
+            <PrivateRoute>
+              <CreateSpreadsheet />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="sheets/:sheetId"
+          element={
+            <PrivateRoute>
+              <SheetDetail />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   );

@@ -2,8 +2,6 @@ import React from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { FcGoogle } from 'react-icons/fc';
 import api from "../api/api";
-import { Link } from 'react-router-dom';
-import logo from '../assets/react.svg'; // Corrected import path
 
 const Login = () => {
   const { googleLogin } = useAuth();
@@ -14,31 +12,20 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      {/* Animated Background */}
+      {/* Animated Background (Subtle Circles) */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* ... background circles ... */}
+        <div className="absolute bg-white opacity-10 rounded-full animate-pulse" style={{ top: '10%', left: '15%', width: '60px', height: '60px' }}></div>
+        <div className="absolute bg-white opacity-15 rounded-full animate-bounce" style={{ top: '30%', right: '20%', width: '80px', height: '80px', animationDelay: '0.5s' }}></div>
+        <div className="absolute bg-white opacity-10 rounded-full animate-pulse" style={{ bottom: '15%', left: '35%', width: '40px', height: '40px', animationDelay: '1s' }}></div>
+        <div className="absolute bg-white opacity-20 rounded-full animate-bounce" style={{ bottom: '25%', right: '10%', width: '100px', height: '100px', animationDelay: '1.5s' }}></div>
+        <div className="absolute bg-white opacity-15 rounded-full animate-pulse" style={{ top: '45%', left: '50%', width: '70px', height: '70px', animationDelay: '2s' }}></div>
       </div>
 
       {/* Login Card */}
-      <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full ">
-        {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <img src={logo} alt="EasySheets Logo" className="h-12" /> {/* Adjust size with className */}
-        </div>
-
+      <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full "> {/* Removed "relative" here */}
         <h2 className="text-3xl font-extrabold text-black tracking-wider text-center mb-6">
           EASY <span className="text-yellow-300">SHEETS</span>
         </h2>
-
-        {/* Introductory Content */}
-        <div className="mb-8 text-center text-gray-700">
-          <p className="mb-4">
-            Welcome to EasySheets! Your intuitive platform for creating, managing, and collaborating on spreadsheets. Get started by signing in with your Google account.
-          </p>
-          <p className="text-sm">
-            By signing in, you agree to our <Link to="/terms-of-service" className="text-indigo-500 hover:underline">Terms of Service</Link> and acknowledge our <Link to="/privacy-policy" className="text-indigo-500 hover:underline">Privacy Policy</Link>.
-          </p>
-        </div>
 
         {/* Google Sign-in Button */}
         <button

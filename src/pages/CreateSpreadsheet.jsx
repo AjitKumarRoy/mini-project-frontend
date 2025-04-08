@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { SpreadsheetContext } from "../contexts/SpreadsheetContext"; // Import the context
+import { ArrowLeftCircle } from "lucide-react";
+import { motion } from "framer-motion";
+
 
 const CreateSpreadsheet = () => {
   const navigate = useNavigate();
@@ -11,6 +15,7 @@ const CreateSpreadsheet = () => {
   const [selectedDates, setSelectedDates] = useState({});
   const [showCalendar, setShowCalendar] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { setNeedsRefresh } = useContext(SpreadsheetContext); // Get the setter function
 
   const handleColumnChange = (index, key, value) => {
     const updatedCols = [...columns];
@@ -68,6 +73,7 @@ const CreateSpreadsheet = () => {
         values: [columns.map((col) => col.name)],
       });
 
+      setNeedsRefresh(true); // Trigger the refresh in Navbar
       navigate(`/sheets/${spreadsheetId}`);
     } catch (error) {
       console.error(error);
@@ -76,8 +82,28 @@ const CreateSpreadsheet = () => {
     }
   };
 
+    const handleBack = () => {
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+      } else {
+        navigate("/"); // Fallback: Navigate to home (or any default route)
+      }
+    };
+
   return (
-    <div className="p-4 bg-gradient-to-br from-gray-100 to-gray-200 pt-20 pb-8">
+    <div className="p-4 bg-gradient-to-br from-gray-100 to-gray-200 pt-10 pb-8">
+
+      {/* Back Icon at the top */}
+      <motion.button
+        onClick={handleBack}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="self-start inline-flex mb-4 items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
+      >
+        <ArrowLeftCircle size={22} />
+        <span className="font-medium">Back</span>
+      </motion.button>
+
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-2xl font-semibold mb-6 text-center text-blue-600">
           New Spreadsheet

@@ -9,12 +9,19 @@ spreadsheet-frontend/
 │   │   ├── Navbar.jsx
 │   │   ├── PrivateRoute.jsx
 │   │   ├── SpreadsheetForm.jsx
+│   │   ├── PublicLayout.jsx
 │   │   ├── ui
 │   │        └── button.jsx
 |   |        └── card.jsx
 |   |        └── dialog.jsx
 │   ├── hooks/
 │   │   ├── useAuth.js
+│   │   └── 
+│   ├── contexts/
+│   │   ├── SpreadsheetContext.jsx
+│   │   
+│   ├── styles/
+│   │   ├── custom.css
 │   │   └── 
 │   ├── pages/
 │   │   ├── Login.jsx
@@ -32,6 +39,7 @@ spreadsheet-frontend/
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
+|   └── App.css
 ├── package.json
 ├── vite.config.js
 └── tailwind.config.js
