@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -27,7 +27,7 @@ const templates = [
   {
     title: "Attendance Tracker",
     description: "Track attendance easily.",
-    id: 1,
+    id: "attendance-tracker", // Changed id to a string
     icon: "calendar",
   },
   {
@@ -71,6 +71,7 @@ const templates = [
 const Dashboard = () => {
   const carouselRef = useRef(null);
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     setMounted(true);
@@ -84,6 +85,15 @@ const Dashboard = () => {
   };
 
   const allItems = [createNewCard, ...templates];
+
+  const handleUseTemplate = (templateId) => {
+    if (templateId === "attendance-tracker") {
+      navigate("/attendance-tracker"); // Navigate to the Attendance Tracker template route
+    } else {
+      // Handle navigation for other templates if needed
+      console.log(`Using template: ${templateId}`);
+    }
+  };
 
   return (
     <div className="bg-gray-100 flex flex-col items-center p-6 pt-10">
@@ -139,6 +149,7 @@ const Dashboard = () => {
                       <Button
                         variant="outline"
                         className="text-indigo-700 border-indigo-500 hover:bg-indigo-50 transition duration-200 text-sm px-3 py-1"
+                        onClick={() => handleUseTemplate(item.id)} // Added onClick handler
                       >
                         Use
                       </Button>

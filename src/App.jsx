@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CreateSpreadsheet from "./pages/CreateSpreadsheet";
 import SheetDetail from "./pages/SheetDetail";
+import AttendanceTrackerTemplate from "./pages/AttendanceTrackerTemplate";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
@@ -113,6 +114,14 @@ function App() {
           element={
             <PrivateRoute>
               <SheetDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="attendance-tracker"
+          element={
+            <PrivateRoute>
+              <AttendanceTrackerTemplate />
             </PrivateRoute>
           }
         />
