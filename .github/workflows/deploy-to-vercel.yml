@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read  # This is required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -21,17 +21,16 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies with legacy-peer-deps
-        run: |
-          npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Build the Vite project
-        run: |
-          npm run build --if-present
+        run: npm run build
 
-      - name: Deploy to Vercel
+      - name: Deploy to Vercel (dist only)
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-args: '--prod' 
+          vercel-args: '--prod'
+          working-directory: ./dist
